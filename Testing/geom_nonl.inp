@@ -1,0 +1,102 @@
+function [Geom,Prop,Force] = input_file
+%**********************************************************************************************
+%   Scriptfile name:    indat.m     (EXAMPLE 2D-FRAME INPUT DATA)
+%
+%   Main Program:   casap.m
+%
+%       This is the main data input file for the computer aided
+%       structural analysis program CASAP.  The user must supply
+%       the required numeric values for the variables found in
+%       this file (see user's manual for instructions).
+%
+%   Variable descriptions:  (in the order in which they appear)
+%
+%       npoin        =    number of nodes in the structure
+%       nelem        =    number of elements in the structure
+%       nload        =    number of different load cases to be analyzed
+%       ID           =    information concerning the boundary conditions
+%       nodecoord    =    global coordinates of the nodes in the structure
+%       lnods        =    nodal connectivity information. 
+%       E(ielem)     =    modulus of elasticity of element ielem
+%       A(ielem)     =    cross-sectional area of element ielem
+%       Iz(ielem)    =    moment of inertia with respect to the local z-axis of element ielem
+%       Pnods        =    array of nodal loads in global degrees of freedom
+%       Pelem        =    element loads or loads which are applied between nodes
+%       a            =    distance from the left end of an element to the element load
+%       w            =    distributed loads on the structure
+%
+%**********************************************************************************************
+%% Structure type
+istrtp = 3;
+%% Geometric Non-Linearity 
+GNL=1
+Stability=0
+%% This is a set of dummy values for this variables needed for 3D analysis
+G = 0;Ix = 0;Iy = 0;
+%   SET NPOIN EQUAL TO THE NUMBER OF NODES IN THE STRUCTURE
+npoin = 3;
+%   SET NELEM EQUAL TO THE NUMBER OF ELEMENTS IN THE STRUCTURE
+nelem = 2;
+%   SET NLOAD EQUAL TO THE NUMBER OF LOAD CASES
+nload = 1;
+%   INPUT THE ID MATRIX CONTAINING THE NODAL BOUNDARY CONDITIONS (ROW #  = 
+%   NODE #)
+ID = [1, 1, 1;
+      0, 0, 0;
+      1, 1, 1];
+%   INPUT THE NODE COORDINATE (X,Y) MATRIX, NODECOOR (ROW #  =  NODE #)
+%   STRUCTURAL PROPERTIES UNITS: mm
+nodecoor = [
+   0, 0;
+   12*cos(pi/8) , 12*sin(pi/8);
+   24*cos(pi/8) , 0];
+%   INPUT THE ELEMENT CONNECTIVITY MATRIX, LNODS (ROW #  =  ELEMENT #)
+lnods = [
+   1 2
+   2 3];
+%   INPUT THE MATERIAL PROPERTIES AND CROSS SECTIONAL CHARACTERISTICS ASSOCIATED WITH THIS 
+%   TYPE OF STRUCTURE PUT INTO ARRAYS WHERE THE INDEX NUMBER IS EQUAL TO THE CORRESPONDING 
+%   ELEMENT NUMBER.
+%   STRUCTURAL PROPERTIES UNITS: kN/mm^2, m^2, m^4
+E   =  200000*[1 1];
+A   =  [1 1];
+Iz  =  [1 1];
+%   INPUT THE LOAD DATA.  
+%      PNODS: NODAL LOADS. IF THERE ARE NO NODAL LOADS, PNODS SHOULD BE EQUAL TO 'NONE', OTHERWISE
+%   PNODS SHOULD BE IN MATRIX FORM: THE COLUMNS CORRESPOND TO THE GLOBAL DEGREE OF FREEDOM 
+%   IN WHICH THE LOAD IS ACTING AND THE THE ROW NUMBER CORRESPONDS WITH THE LOAD CASE NUMBER.  
+%      PELEM: ELEMENT LOAD IN Y DIRECTION (LOCAL COORDINATE SYSTEM WITH ELEMENT AXIS IN X DIRECTION),
+%   GIVEN IN A MATRIX, WITH COLUMNS CORRESPONDING TO THE ELEMENT NUMBER AND ROW THE LOAD CASE.  
+%      A: DISTANCE FROM THE LEFT END OF THE ELEMENT TO THE LOAD, IN ARRAY FORM (LOCAL COORDINATE
+%   SYSTEM).  
+%      W: DISTRIBUTED LOAD IN Y DIRECTION, SHOULD BE IN MATRIX FORM WITH COLUMNS  =  ELEMENT
+%   NUMBER UPON WHICH W IS ACTING AND ROWS  =  LOAD CASE.
+%      ZEROS SHOULD BE USED IN THE MATRICES WHEN THERE IS NO LOAD PRESENT.  NODAL LOADS SHOULD
+%   BE GIVEN IN GLOBAL COORDINATES, WHEREAS THE ELEMENT LOADS AND DISTRIBUTED LOADS SHOULD BE
+%   GIVEN IN LOCAL COORDINATES.
+%   LOAD UNITS: kN, kN, mm, kN/mm
+Pnods = [0,-5000, 0]; % Nodal load for the all the free dof 
+Pelem = [0,0]; % Two columns, none of them has a load along the element
+a = [0,0];
+w = [0,0];
+%% Assign to structure Data
+Geom.istrtp = istrtp;
+Geom.npoin = npoin;
+Geom.nelem = nelem;
+Geom.ID = ID;
+Geom.nodecoor = nodecoor;
+Geom.lnods = lnods;
+Geom.GNL=GNL
+Geom.Stability=Stability
+Prop.E = E;
+Prop.G = G;
+Prop.A = A;
+Prop.Ix = Ix;
+Prop.Iy = Iy;
+Prop.Iz = Iz;
+Force.nload = nload;
+Force.Pnods = Pnods;
+Force.Pelem = Pelem;
+Force.a = a;
+Force.w = w;
+end
