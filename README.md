@@ -5,9 +5,9 @@ MATLAB program that performs structural analysis to any arbitrary frame structur
 This was a term project for Matrix Structural Analysis. The general outline of the program (along with the CASAP file) was provided and I was in charge of adding all functionality to the program. The term project report is attached if anyone is interested in more information.
 
 # To Run:
-Prepare input file with specifications regarding frame in question. Directions can be found in the input file. 
-Any type of units would work but consistency within units is key to arrive at correct results
-Please select correct element DOF (istrtp) in input file. 
+Prepare input file with specifications regarding frame in question. Directions can be found in the input file. <br>
+Any type of units would work but consistency within units is key to arrive at correct results.<br>
+Please select correct element DOF (istrtp) in input file. <br>
   2-D Frames = 3
   Grid Elements = 4
   3-D Frames = 6
