@@ -8,18 +8,20 @@ This was a term project for Matrix Structural Analysis. The general outline of t
 Prepare input file with specifications regarding frame in question. Directions can be found in the input file. <br>
 Any type of units would work but consistency within units is key to arrive at correct results.<br>
 Please select correct element DOF (istrtp) in input file. <br>
-  2-D Frames = 3
-  Grid Elements = 4
-  3-D Frames = 6
+  2-D Frames = 3 <br>
+  Grid Elements = 4 <br>
+  3-D Frames = 6 <br>
 
-Add input file name to CASAP program and run it. 
+Add input file name to CASAP program and run it. <br>
+
+
 (NOTE: Files need to be in same folder)
 
 # Limitations:
-Stability analysis and Non-linear geometric analysis available for 2-D frames only. 
-To conduct a Stability analysis select -> Stability = 1 in input file.
-To conduct a Geometricl Nonlinear Analysis -> GNL = 1 in input file.
-Stability and Non-linear geometric analysis are not 
+Stability analysis and Non-linear geometric analysis available for 2-D frames only. <br>
+To conduct a Stability analysis select -> Stability = 1 in input file. <br>
+To conduct a Geometricl Nonlinear Analysis -> GNL = 1 in input file. <br>
+Stability and Non-linear geometric analysis are not. <br>
 3D plotting is not working properly.
 
 # Moving Forward:
